@@ -94,6 +94,10 @@ class WikiTable(object):
         Evaluate all rows and determine header position, based on
         greatest number of 'th' tagged elements
         """
+        # Handle missing tr nodes
+        if not self._tr_nodes:
+            self._log('no header found')
+            return []
         th_max = 0
         header_idx = 0
         for idx, tr in enumerate(self._tr_nodes):
